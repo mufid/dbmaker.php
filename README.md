@@ -1,6 +1,6 @@
 # dbmaker.php
 
-A simple, ready-to-use, key-value store for PHP. Not really complete library.
+A simple, ready-to-use, key-value store for Codeigniter. Not really complete library.
 
 ## Installation
 
