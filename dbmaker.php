@@ -172,10 +172,21 @@ class dbmaker {
 				$where_line .= " OR ";
 			}
 			$fieldid = $this->_field_index($table, $key2);
-			$where_line .= "m.type = ? AND s.jenis = ? AND m.value = ?";
-			$escaped[] = $this->_field_index($table, $key2);
-			$escaped[] = $this->_table_index($table);
-			$escaped[] = $value;
+			if ($fieldid >= 2) {
+				$where_line .= "m.type = ? AND s.jenis = ? AND m.value = ?";
+				$escaped[] = $this->_field_index($table, $key2);
+				$escaped[] = $this->_table_index($table);
+				$escaped[] = $value;
+			} else {
+				$tableindex = $this->_table_index($table);
+				if ($fieldid == 0)
+					$fieldname = "kunci";
+				else
+					$fieldname = "isi";
+				$where_line .= "s.jenis = ? AND s.$fieldname = ?";
+				$escaped[] = $tableindex;
+				$escaped[] = $value;
+			}
 		}
 		$q = "
 			SELECT * FROM $this->things_table s
